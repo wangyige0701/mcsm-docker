@@ -12,6 +12,12 @@ RUN mkdir -p ${MCSM_PATH} && \
     chown root:root -R ${MCSM_PATH} && \
     ls -l ${MCSM_PATH}
 
+RUN npm config set registry https://registry.npmmirror.com && \
+    npm config set fetch-retry-maxtimeout 60000 && \
+    npm install npm@latest -g
+    npm install -g pm2 && \
+    npm cache clean --force
+
 RUN mkdir -p ${JAVA_PATH} && \
     curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
     tar -zxvf zulu21.tar.gz -C ${JAVA_PATH} --strip-components=1 && \
@@ -31,4 +37,4 @@ VOLUME [ "${MCSM_PATH}/daemon/data", "${MCSM_PATH}/daemon/logs", "${MCSM_PATH}/w
 
 EXPOSE 24444 23333 25565-25575
 
-CMD [ "bash", "run.sh" ]
+CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]
