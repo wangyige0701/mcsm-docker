@@ -1,11 +1,9 @@
 const { spawn } = require('child_process');
 
-function create (dir) {
-    const target = `${process.env.MCSM_PATH}/${dir}`;
-
+function start (sh) {
     const terminal = spawn('bash', [
         '-c',
-        `cd ${target} && pm2-runtime start app.js`
+        `cd ${process.env.MCSM_PATH} && bash ${sh}.sh`
     ]);
 
     terminal.stdout.on('data', (data) => {
@@ -17,5 +15,5 @@ function create (dir) {
     });
 }
 
-create('daemon');
-create('web');
+start('start-daemon');
+start('start-web');
