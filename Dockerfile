@@ -11,8 +11,8 @@ RUN mkdir -p ${MCSM_PATH} ./mcsm && \
     tar -zxvf mcsm.tar.gz -C ${MCSM_PATH} && \
     rm mcsm.tar.gz && \
     chown root:root -R ${MCSM_PATH} && \
-    cd ${MCSM_PATH} && \
-    chmod +x start-daemon.sh start-web.sh && \
+    mv ${MCSM_PATH}/start-*.sh / && \
+    chmod +x /start-daemon.sh /start-web.sh && \
     ls -l ${MCSM_PATH}
 
 RUN mkdir -p ${JAVA_PATH} && \
@@ -29,4 +29,4 @@ VOLUME [ "${MCSM_PATH}/daemon/data", "${MCSM_PATH}/daemon/logs", "${MCSM_PATH}/w
 
 EXPOSE 24444 23333 25565-25575
 
-CMD [ "/bin/bash", "$MCSM_PATH/start-daemon.sh && $MCSM_PATH/start-web.sh" ]
+CMD [ "/bin/bash", "/start-daemon.sh && /start-web.sh" ]
