@@ -12,15 +12,12 @@ RUN mkdir -p ${MCSM_PATH} && \
     chown root:root -R ${MCSM_PATH} && \
     ls -l ${MCSM_PATH}
 
-# RUN mkdir -p ${MCSM_PATH}/daemon/data ${MCSM_PATH}/daemon/logs && \
-#     mkdir -p ${MCSM_PATH}/web/data ${MCSM_PATH}/web/logs
-
 RUN mkdir -p ${JAVA_PATH} && \
     curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
     tar -zxvf zulu21.tar.gz -C ${JAVA_PATH} --strip-components=1 && \
     rm zulu21.tar.gz && \
     export JAVA_HOME=${JAVA_PATH} && \
-    export PATH=$JAVA_HOME/bin:$PATH && \
+    export PATH=${JAVA_HOME}/bin:$PATH && \
     java --version
 
 COPY run.sh /
