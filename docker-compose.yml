@@ -1,0 +1,15 @@
+services:
+  mcsm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: mcsm
+    ports:
+      - 23333:23333
+      - 24444:24444
+      - 25565-25575:25565-25575
+    volumes:
+      - /mnt/sdc/zulu:/java_download
+      - /data/mcsm/data:/opt/mcsm/data
+      - /data/mcsm/logs:/opt/mcsm/logs
