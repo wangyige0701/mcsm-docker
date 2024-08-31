@@ -29,7 +29,7 @@ RUN mkdir -p ${JAVA_PATH} && \
     . ~/.bashrc && \
     java --version
 
-COPY run.sh /
+COPY script/ /
 
 ENV TZ=Asia/Shanghai
 
