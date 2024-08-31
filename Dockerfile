@@ -29,6 +29,4 @@ VOLUME [ "${MCSM_PATH}/daemon/data", "${MCSM_PATH}/daemon/logs", "${MCSM_PATH}/w
 
 EXPOSE 24444 23333 25565-25575
 
-RUN cd ${MCSM_PATH} && \
-    bash start-daemon.sh && \
-    bash start-web.sh
+CMD [ "${MCSM_PATH}/start-daemon.sh", "${MCSM_PATH}/start-web.sh" ]
