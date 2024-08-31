@@ -1,12 +1,11 @@
 const { spawn } = require('child_process');
 
 function create (dir) {
-    const terminal = spawn('gnome-terminal', [
-        '--working-directory=' + process.env.MCSM_PATH,
-        '--',
-        'bash',
+    const target = `${process.env.MCSM_PATH}/${dir}`;
+
+    const terminal = spawn('bash', [
         '-c',
-        `cd ${dir} && pm2-runtime start app.js`
+        `cd ${target} && pm2-runtime start app.js`
     ]);
 
     terminal.stdout.on('data', (data) => {
