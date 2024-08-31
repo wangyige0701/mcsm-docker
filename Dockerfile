@@ -4,16 +4,16 @@ RUN node --version
 
 ENV MCSM_PATH=/opt/mcsm
 ENV JAVA_PATH=/opt/zulu
-ARG MCSM_VERSION=10.2.1
 
-RUN mkdir -p ${MCSM_PATH} ./mcsm && \
+RUN mkdir -p ${MCSM_PATH} && \
     curl -Ljo mcsm.tar.gz http://mcsm.download.wangyige.cn/download/mcsm.tar.gz && \
     tar -zxvf mcsm.tar.gz -C ${MCSM_PATH} && \
     rm mcsm.tar.gz && \
     chown root:root -R ${MCSM_PATH} && \
-    mv ${MCSM_PATH}/start-*.sh / && \
-    chmod +x /start-daemon.sh /start-web.sh && \
     ls -l ${MCSM_PATH}
+
+# RUN mkdir -p ${MCSM_PATH}/daemon/data ${MCSM_PATH}/daemon/logs && \
+#     mkdir -p ${MCSM_PATH}/web/data ${MCSM_PATH}/web/logs
 
 RUN mkdir -p ${JAVA_PATH} && \
     curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
@@ -23,10 +23,12 @@ RUN mkdir -p ${JAVA_PATH} && \
     export PATH=$JAVA_HOME/bin:$PATH && \
     java --version
 
+COPY run.sh /
+
 ENV TZ=Asia/Shanghai
 
 VOLUME [ "${MCSM_PATH}/daemon/data", "${MCSM_PATH}/daemon/logs", "${MCSM_PATH}/web/data", "${MCSM_PATH}/web/logs" ]
 
 EXPOSE 24444 23333 25565-25575
 
-CMD [ "/bin/bash", "/start-daemon.sh && /start-web.sh" ]
+CMD [ "bash", "run.sh" ]
