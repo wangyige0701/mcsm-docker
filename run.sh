@@ -1,5 +1,5 @@
 #!/bin/bash
 
-bash ${MCSM_PATH}/start-daemon.sh
-bash ${MCSM_PATH}/start-web.sh
+cd ${MCSM_PATH}
+bash "start-daemon.sh && start-web.sh"
 
