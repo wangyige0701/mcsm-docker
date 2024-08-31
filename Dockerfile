@@ -22,8 +22,6 @@ RUN tar -zxvf zulu21.tar.gz ./zulu && \
     export PATH=$JAVA_HOME/bin:$PATH && \
     java --version
 
-COPY root/ /
-
 ENV TZ=Asia/Shanghai
 
 VOLUME [ "${MCSM_PATH}/data", "${MCSM_PATH}/logs" ]
