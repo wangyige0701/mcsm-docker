@@ -3,6 +3,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/wyg-images/node:20
 RUN node --version
 
 ENV MCSM_PATH=/opt/mcsm
+ENV JAVA_PATH=/opt/zulu
 ARG MCSM_VERSION=10.2.1
 
 RUN mkdir -p ${MCSM_PATH} ./mcsm && \
@@ -11,11 +12,11 @@ RUN mkdir -p ${MCSM_PATH} ./mcsm && \
     rm mcsm.tar.gz && \
     chown root:root -R ${MCSM_PATH}
 
-RUN mkdir ./zulu && \
+RUN mkdir -p ${JAVA_PATH} && \
     curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
-    tar -zxvf zulu21.tar.gz -C ./zulu && \
+    tar -zxvf zulu21.tar.gz -C ${JAVA_PATH} --strip-components=1 && \
     rm zulu21.tar.gz && \
-    export JAVA_HOME=./zulu && \
+    export JAVA_HOME=${JAVA_PATH} && \
     export PATH=$JAVA_HOME/bin:$PATH && \
     java --version
 
