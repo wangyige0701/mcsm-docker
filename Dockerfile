@@ -10,7 +10,8 @@ RUN mkdir -p ${MCSM_PATH} ./mcsm && \
     curl -Ljo mcsm.tar.gz http://mcsm.download.wangyige.cn/download/mcsm.tar.gz && \
     tar -zxvf mcsm.tar.gz -C ${MCSM_PATH} && \
     rm mcsm.tar.gz && \
-    chown root:root -R ${MCSM_PATH}
+    chown root:root -R ${MCSM_PATH} && \
+    ls -l ${MCSM_PATH}
 
 RUN mkdir -p ${JAVA_PATH} && \
     curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
@@ -27,5 +28,6 @@ VOLUME [ "${MCSM_PATH}/daemon/data", "${MCSM_PATH}/daemon/logs", "${MCSM_PATH}/w
 EXPOSE 24444 23333 25565-25575
 
 RUN cd ${MCSM_PATH} && \
-    script start-daemon.sh && \
-    script start-web.sh
+    chmod +x start-daemon.sh start-web.sh && \
+    bash start-daemon.sh && \
+    bash start-web.sh
