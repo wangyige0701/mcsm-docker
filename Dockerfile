@@ -12,6 +12,8 @@ RUN mkdir -p ${MCSM_PATH} && \
     mv ./mcsm ${MCSM_PATH} && \
     chown root:root -R ${MCSM_PATH}
 
+RUN mkdir /java_download
+
 VOLUME [ "/java_download" ]
 
 COPY /java_download/zulu21.tar.gz ./zulu21.tar.gz
