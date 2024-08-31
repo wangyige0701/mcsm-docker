@@ -10,7 +10,6 @@ services:
       - 24444:24444
       - 25565-25575:25565-25575
     volumes:
-      - /mnt/sdc/zulu:/java_download
       - /data/mcsm/daemon/data:/opt/mcsm/daemon/data
       - /data/mcsm/web/data:/opt/mcsm/web/data
       - /data/mcsm/daemon/logs:/opt/mcsm/daemon/logs
