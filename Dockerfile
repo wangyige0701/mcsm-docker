@@ -5,16 +5,14 @@ RUN node --version
 ENV MCSM_PATH=/opt/mcsm
 ARG MCSM_VERSION=10.2.1
 
-VOLUME [ "/join" ]
-
 RUN mkdir -p ${MCSM_PATH} && \
-    cp /join/mcsm.tar.gz ./ && \
+    curl -Ljo mcsm.tar.gz http://mcsm.download.wangyige.cn/download/mcsm.tar.gz && \
     tar -zxvf mcsm.tar.gz ./mcsm && \
     rm mcsm.tar.gz && \
     mv ./mcsm ${MCSM_PATH} && \
     chown root:root -R ${MCSM_PATH}
 
-RUN cp /join/zulu21.tar.gz ./ && \
+RUN curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
     tar -zxvf zulu21.tar.gz ./zulu && \
     rm zulu21.tar.gz && \
     export JAVA_HOME=./zulu && \
