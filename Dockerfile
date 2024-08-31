@@ -13,8 +13,7 @@ RUN mkdir -p ${MCSM_PATH} ./mcsm && \
 
 RUN mkdir ./zulu && \
     curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
-    tar -zxvf zulu21.tar.gz ./zulu21.36.17-ca-jdk21.0.4-linux_x64 && \
-    mv ./zulu21.36.17-ca-jdk21.0.4-linux_x64 ./zulu && \
+    tar -zxvf zulu21.tar.gz -C ./zulu && \
     rm zulu21.tar.gz && \
     export JAVA_HOME=./zulu && \
     export PATH=$JAVA_HOME/bin:$PATH && \
