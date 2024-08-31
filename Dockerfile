@@ -14,7 +14,7 @@ RUN mkdir -p ${MCSM_PATH} && \
 
 RUN npm config set registry https://registry.npmmirror.com && \
     npm config set fetch-retry-maxtimeout 60000 && \
-    npm install npm@latest -g
+    npm install npm@latest -g && \
     npm install -g pm2 && \
     npm cache clean --force
 
