@@ -14,7 +14,7 @@ RUN mkdir -p ${MCSM_PATH} && \
 
 VOLUME /java_download
 
-COPY /java_download/zulu21.tar.gz .
+COPY /java_download/zulu21.tar.gz ./zulu21.tar.gz
 
 RUN tar -zxvf zulu21.tar.gz ./zulu && \
     rm zulu21.tar.gz && \
