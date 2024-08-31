@@ -5,20 +5,17 @@ RUN node --version
 ENV MCSM_PATH=/opt/mcsm
 ARG MCSM_VERSION=10.2.1
 
+VOLUME [ "/join" ]
+
 RUN mkdir -p ${MCSM_PATH} && \
-    curl -Ljo mcsm.tar.gz https://github.com/MCSManager/MCSManager/releases/download/v${MCSM_VERSION}/mcsmanager_linux_release.tar.gz && \
+    cp /join/mcsm.tar.gz ./ && \
     tar -zxvf mcsm.tar.gz ./mcsm && \
     rm mcsm.tar.gz && \
     mv ./mcsm ${MCSM_PATH} && \
     chown root:root -R ${MCSM_PATH}
 
-RUN mkdir /java_download
-
-VOLUME [ "/java_download" ]
-
-COPY /java_download/zulu21.tar.gz ./zulu21.tar.gz
-
-RUN tar -zxvf zulu21.tar.gz ./zulu && \
+RUN cp /join/zulu21.tar.gz ./ && \
+    tar -zxvf zulu21.tar.gz ./zulu && \
     rm zulu21.tar.gz && \
     export JAVA_HOME=./zulu && \
     export PATH=$JAVA_HOME/bin:$PATH && \
