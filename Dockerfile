@@ -15,12 +15,13 @@ RUN mkdir -p ${MCSM_PATH} && \
 RUN mkdir -p ${JAVA_PATH} && \
     curl -Ljo zulu21.tar.gz http://mcsm.download.wangyige.cn/download/zulu21.tar.gz && \
     tar -zxvf zulu21.tar.gz -C ${JAVA_PATH} --strip-components=1 && \
-    rm zulu21.tar.gz
-
-ENV JAVA_HOME=${JAVA_PATH} \
-    PATH=$JAVA_HOME/bin:$PATH
-
-RUN java --version
+    rm zulu21.tar.gz && \
+    export JAVA_HOME=${JAVA_PATH} && \
+    export PATH=$JAVA_HOME/bin:$PATH && \
+    echo "export JAVA_HOME=${JAVA_PATH}" >> ~/.bashrc && \
+    echo "export PATH=$JAVA_HOME/bin:$PATH" >> ~/.bashrc && \
+    . ~/.bashrc && \
+    java --version
 
 COPY run.sh /
 
