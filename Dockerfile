@@ -29,7 +29,7 @@ RUN mkdir -p ${JAVA_PATH} && \
     . ~/.bashrc && \
     java --version
 
-COPY script/ /
+COPY start.js /
 
 ENV TZ=Asia/Shanghai
 
@@ -37,4 +37,4 @@ VOLUME [ "${MCSM_PATH}/daemon/data", "${MCSM_PATH}/daemon/logs", "${MCSM_PATH}/w
 
 EXPOSE 24444 23333 25565-25575
 
-CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]
+CMD [ "node", "start.js" ]
