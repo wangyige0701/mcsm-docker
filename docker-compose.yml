@@ -14,6 +14,3 @@ services:
       - /data/mcsm/web/data:/opt/mcsm/web/data
       - /data/mcsm/daemon/logs:/opt/mcsm/daemon/logs
       - /data/mcsm/web/logs:/opt/mcsm/web/logs
-networks:
-  mcsm_default:
-    external: true
