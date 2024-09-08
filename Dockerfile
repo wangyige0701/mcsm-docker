@@ -31,7 +31,7 @@ RUN npm config set registry https://registry.npmmirror.com && \
 
 # COPY start.js / # 通过原脚本启动，开启多个窗口时可能不能自动重启
 
-COPY exosystem.config.js /
+COPY ecosystem.config.js /
 
 ENV TZ=Asia/Shanghai
 
