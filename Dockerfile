@@ -23,7 +23,15 @@ RUN mkdir -p ${JAVA_PATH} && \
     . ~/.bashrc && \
     java --version
 
-COPY start.js /
+RUN npm config set registry https://registry.npmmirror.com && \
+    npm config set fetch-retry-maxtimeout 60000 && \
+    npm install npm@latest -g && \
+    npm install -g pm2 && \
+    npm cache clean --force
+
+# COPY start.js / # 通过原脚本启动，开启多个窗口时可能不能自动重启
+
+COPY exosystem.config.js /
 
 ENV TZ=Asia/Shanghai
 
@@ -31,4 +39,4 @@ VOLUME [ "${MCSM_PATH}/daemon/data", "${MCSM_PATH}/daemon/logs", "${MCSM_PATH}/w
 
 EXPOSE 24444 23333 25565-25575
 
-CMD [ "node", "start.js" ]
+CMD [ "pm2-runtime", "ecosystem.config.js" ]
